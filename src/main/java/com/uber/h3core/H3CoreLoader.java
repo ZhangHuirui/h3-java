@@ -15,11 +15,7 @@
  */
 package com.uber.h3core;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Extracts the native H3 core library to the local filesystem and loads it.
@@ -109,7 +105,7 @@ public final class H3CoreLoader {
         // This is synchronized because if multiple threads were writing and
         // loading the shared object at the same time, bad things could happen.
 
-        if (libraryFile == null) {
+        if (libraryFile == null || !libraryFile.exists()) {
             final String dirName = String.format("%s-%s", os.getDirName(), arch);
             final String libName = String.format("libh3-java%s", os.getSuffix());
 
